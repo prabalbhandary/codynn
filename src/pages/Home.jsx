@@ -25,7 +25,7 @@ const Home = () => {
       return;
     }
     try {
-      const response = await axios.post("https://interview-mock-api.onrender.com/files", {
+      const response = await axios.post("https://interview-mock-api.onrender.com/upload", {
         name: fileName,
         uploadedOn: new Date().toISOString().split("T")[0],
       });
@@ -39,7 +39,7 @@ const Home = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://interview-mock-api.onrender.com/files/${id}`);
+      await axios.delete(`https://interview-mock-api.onrender.com/uploads/${id}`);
       setFiles(files.filter((file) => file.id !== id));
     } catch (error) {
       console.error("Error deleting file:", error);
