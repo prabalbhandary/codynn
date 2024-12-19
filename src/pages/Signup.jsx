@@ -1,70 +1,57 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  const handleSignup = async () => {
     try {
-      const res = await axios.post(
-        "https://interview-mock-api.onrender.com/api-docs/signup",
-        { email, password }
-      );
-      if (res.data.status === "success") {
-        alert("Signup successfully!!");
-        navigate("/login");
-      } else {
-        alert("Something went wrong");
-      }
+      const response = await axios.post("https://interview-mock-api.onrender.com/signup", {
+        email,
+        password,
+      });
+      alert(`Signup successful: ${response.data.message}`);
     } catch (error) {
-      console.log(error);
+      console.error("Error during signup:", error);
+      alert("Signup failed. Please try again.");
     }
   };
+
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <h1 className="text-center text-2xl">SIGNUP</h1>
-      <div className="w-1/3 bg-gray-100 p-4">
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col">
-            <label className="block mb-2 text-lg" htmlFor="email">
-              Email: <p className="text-red-500">*</p>
-            </label>
-            <input
-              className="block mb-4"
-              placeholder="Enter your email"
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="block mb-2 text-lg" htmlFor="password">
-              Password: <p className="text-red-500">*</p>
-            </label>
-            <input
-              className="block mb-4"
-              placeholder="Enter your password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              id="password"
-              required
-            />
-          </div>
-          <button
-            className="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Signup
-          </button>
-        </form>
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="w-96 bg-gray-200 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center mb-6">SIGNUP</h2>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium mb-1">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full border rounded-lg p-2"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-sm font-medium mb-1">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border rounded-lg p-2"
+          />
+        </div>
+        <button
+          onClick={handleSignup}
+          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+        >
+          Signup
+        </button>
       </div>
     </div>
   );
