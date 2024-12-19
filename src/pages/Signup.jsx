@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +23,18 @@ const Signup = () => {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-96 bg-gray-200 p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center mb-6">SIGNUP</h2>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-sm font-medium mb-1">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full border rounded-lg p-2"
+          />
+        </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-medium mb-1">
             Email
