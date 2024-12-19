@@ -12,7 +12,7 @@ const Home = () => {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get("https://interview-mock-api.onrender.com/files");
+      const response = await axios.get("https://interview-mock-api.onrender.com/uploads");
       setFiles(response.data);
     } catch (error) {
       console.error("Error fetching files:", error);
